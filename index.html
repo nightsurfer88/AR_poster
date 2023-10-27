@@ -6,11 +6,13 @@
     <body style="margin: 0px; overflow: hidden;">
         <a-scene embedded arjs>
             <a-marker preset="hiro">
-                <!-- Use the a-image component to display a PNG image -->
+                <!-- Use the a-video component to display an MP4 video -->
                 <a-video
                     position="0 0 0"
                     scale="1 1 1"
+                    rotation="-90 0 0"
                     src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
+                    autoplay
                 ></a-video>
             </a-marker>
             <a-entity camera></a-entity>
