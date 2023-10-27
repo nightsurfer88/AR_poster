@@ -55,9 +55,9 @@
                 const videoElement = document.getElementById("video");
                 const playButton = document.getElementById("play-button");
                 let videoPlaying = false; // Variable to track video playback state
-        
+            
                 const marker = document.querySelector('a-marker[type="pattern"]');
-        
+            
                 if (marker) {
                     marker.addEventListener("markerFound", () => {
                         // Show the play button when marker is found and the video is not playing
@@ -66,7 +66,7 @@
                         }
                     });
                 }
-        
+            
                 // Add a click event listener to the play button
                 playButton.addEventListener("click", () => {
                     // Check if the video is not playing
@@ -77,17 +77,17 @@
                         videoPlaying = true;
                     }
                 });
-        
+            
                 // Listen for video play and pause events
                 videoElement.addEventListener("play", () => {
                     videoPlaying = true;
                 });
-        
+            
                 videoElement.addEventListener("pause", () => {
                     videoPlaying = false;
                 });
             }
-
+            
             // Add an event listener to call the initialization function when the page has finished loading
             document.addEventListener("DOMContentLoaded", initializeAR);
         </script>
