@@ -35,23 +35,39 @@
         <script>
             const videoElement = document.getElementById("video");
             const playButton = document.getElementById("play-button");
-            
+            let videoPlaying = false; // Variable to track video playback state
+        
             // Listen for marker detection event
             AFRAME.registerComponent("marker-listener", {
                 init: function () {
                     const marker = this.el;
                     marker.addEventListener("markerFound", () => {
-                        // Show the play button when marker is found
-                        playButton.setAttribute("visible", true);
+                        // Show the play button when marker is found and the video is not playing
+                        if (!videoPlaying) {
+                            playButton.setAttribute("visible", true);
+                        }
                     });
                 },
             });
-            
+        
             // Add a click event listener to the play button
             playButton.addEventListener("click", () => {
-                // Play the video and hide the play button
-                videoElement.play();
-                playButton.setAttribute("visible", false);
+                // Check if the video is not playing
+                if (!videoPlaying) {
+                    // Play the video, hide the play button, and update the videoPlaying state
+                    videoElement.play();
+                    playButton.setAttribute("visible", false);
+                    videoPlaying = true;
+                }
+            });
+        
+            // Listen for video play and pause events
+            videoElement.addEventListener("play", () => {
+                videoPlaying = true;
+            });
+        
+            videoElement.addEventListener("pause", () => {
+                videoPlaying = false;
             });
         </script>
     </body>
