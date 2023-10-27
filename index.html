@@ -13,22 +13,9 @@
                     rotation="-90 0 0"
                     src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
                     id="video"
+                    autoplay
                     muted
                 ></a-video>
-                
-                <script>
-                  const videoElement = document.getElementById("video");
-                
-                  // Listen for marker detection event
-                  AFRAME.registerComponent("marker-listener", {
-                    init: function () {
-                      const marker = this.el;
-                      marker.addEventListener("markerFound", () => {
-                        videoElement.play();
-                      });
-                    },
-                  });
-                </script> 
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
