@@ -24,7 +24,7 @@
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
             <!-- Container for video and play button -->
             <a-entity position="0 0 0">
-                <!-- Use the a-video component to display an MP4 video -->
+                <!-- Use the a-video component to display an MP4 video with a poster -->
                 <a-video
                     position="0 0 0"
                     scale="3.5 2 1"
@@ -32,6 +32,7 @@
                     src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
                     id="video"
                     muted
+                    poster="https://nightsurfer88.github.io/AR_poster/Assets/poster.png"
                 ></a-video>
                 <!-- Play button (start button) -->
                 <a-image
@@ -50,20 +51,24 @@
             const videoElement = document.getElementById("video");
             const playButton = document.getElementById("play-button");
 
-            // Add an event listener to play the video when it can play
-            videoElement.addEventListener("canplay", () => {
-                // Video is ready to play, hide the play button (start button).
-                playButton.setAttribute("visible", false);
-                videoElement.play();
+            // Add a click event listener to the video element
+            videoElement.addEventListener("click", () => {
+                if (videoElement.paused) {
+                    // Play the video, hide the play button (start button), and update the videoPlaying state
+                    videoElement.play();
+                    playButton.setAttribute("visible", false);
+                }
             });
 
-            // On marker found, try to play the video.
-            const marker = document.querySelector('a-marker[type="pattern"]');
-            if (marker) {
-                marker.addEventListener("markerFound", () => {
+            // Add a click event listener to the scene element (whole screen)
+            const scene = document.querySelector("a-scene");
+            scene.addEventListener("click", () => {
+                if (videoElement.paused) {
+                    // Play the video, hide the play button (start button), and update the videoPlaying state
                     videoElement.play();
-                });
-            }
+                    playButton.setAttribute("visible", false);
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", initializeAR);
