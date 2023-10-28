@@ -23,9 +23,9 @@
 
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster</div>
+    <div id="ar-title">AR Poster 1.0</div>
 
-    <a-scene embedded arjs willReadFrequently="true">
+    <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
             <!-- Container for video and play button -->
             <a-entity position="0 0 0">
@@ -36,8 +36,8 @@
                     rotation="-90 0 0"
                     src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
                     id="video"
-                    muted
                     poster="https://nightsurfer88.github.io/AR_poster/Assets/poster.png"
+                    willReadFrequently="true"
                 ></a-video>
                 <!-- Play button (start button) -->
                 <a-image
