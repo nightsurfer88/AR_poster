@@ -23,7 +23,7 @@
 
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster 1.14</div>
+    <div id="ar-title">AR Poster 1.15</div>
 
     <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
@@ -49,22 +49,14 @@
             const videoElement = document.getElementById("video");
             const scene = document.querySelector("a-scene");
 
-            // Show a message prompting the user to click to start the video
-            const message = document.createElement("div");
-            message.innerHTML = "Tap to start the video";
-            message.style.position = "absolute";
-            message.style.top = "50%";
-            message.style.left = "50%";
-            message.style.transform = "translate(-50%, -50%)";
-            message.style.color = "white";
-            scene.appendChild(message);
-
             // Add a click event listener to the scene element (whole screen)
             scene.addEventListener("click", function () {
                 if (videoElement.paused) {
-                    // Remove the message and play the video
-                    scene.removeChild(message);
+                    // Play the video
                     videoElement.play();
+                } else {
+                    // Pause the video
+                    videoElement.pause();
                 }
             });
         }
@@ -72,5 +64,4 @@
         document.addEventListener("DOMContentLoaded", initializeAR);
     </script>
 </body>
-
 </html>
