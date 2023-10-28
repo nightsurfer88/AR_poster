@@ -48,46 +48,45 @@
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
-        
         <script>
             // Wrap the event listener registration in a function
             function initializeAR() {
                 const videoElement = document.getElementById("video");
                 const playButton = document.getElementById("play-button");
-                let videoPlaying = false; // Variable to track video playback state
-            
+        
+                videoElement.addEventListener("playing", () => {
+                    // Video is playing, hide the play button
+                    playButton.setAttribute("visible", false);
+                });
+        
+                videoElement.addEventListener("ended", () => {
+                    // Video has ended, show the play button again
+                    playButton.setAttribute("visible", true);
+                });
+        
                 const marker = document.querySelector('a-marker[type="pattern"]');
-            
+        
                 if (marker) {
                     marker.addEventListener("markerFound", () => {
                         // Show the play button when marker is found and the video is not playing
-                        if (!videoPlaying) {
+                        if (!videoElement.paused) {
+                            playButton.setAttribute("visible", false);
+                        } else {
                             playButton.setAttribute("visible", true);
                         }
                     });
                 }
-            
+        
                 // Add a click event listener to the play button
                 playButton.addEventListener("click", () => {
                     // Check if the video is not playing
-                    if (!videoPlaying) {
-                        // Play the video, hide the play button, and update the videoPlaying state
+                    if (videoElement.paused) {
+                        // Play the video and update the visible state of the play button
                         videoElement.play();
-                        playButton.setAttribute("visible", false);
-                        videoPlaying = true;
                     }
                 });
-            
-                // Listen for video play and pause events
-                videoElement.addEventListener("play", () => {
-                    videoPlaying = true;
-                });
-            
-                videoElement.addEventListener("pause", () => {
-                    videoPlaying = false;
-                });
             }
-            
+        
             // Add an event listener to call the initialization function when the page has finished loading
             document.addEventListener("DOMContentLoaded", initializeAR);
         </script>
