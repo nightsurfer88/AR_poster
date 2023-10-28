@@ -50,20 +50,19 @@
             const videoElement = document.getElementById("video");
             const playButton = document.getElementById("play-button");
 
-            const playVideo = () => {
-                videoElement.play().catch(() => {
-                    // Autoplay failed, show the play button (start button).
-                    playButton.setAttribute("visible", true);
-                });
-            };
-
-            // Try to play the video on user interaction (tap or click).
-            playButton.addEventListener("click", playVideo);
+            // Add an event listener to play the video when it can play
+            videoElement.addEventListener("canplay", () => {
+                // Video is ready to play, hide the play button (start button).
+                playButton.setAttribute("visible", false);
+                videoElement.play();
+            });
 
             // On marker found, try to play the video.
             const marker = document.querySelector('a-marker[type="pattern"]');
             if (marker) {
-                marker.addEventListener("markerFound", playVideo);
+                marker.addEventListener("markerFound", () => {
+                    videoElement.play();
+                });
             }
         }
 
