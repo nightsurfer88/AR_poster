@@ -27,7 +27,7 @@
 
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster 1.19</div>
+    <div id="ar-title">AR Poster 1.20</div>
 
     <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt" emitevents="true" cursor="rayOrigin: mouse" id="animated-marker" value='6'>
@@ -47,25 +47,6 @@
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-        function initializeAR() {
-            const videoElement = document.getElementById("video");
-            const scene = document.querySelector("a-scene");
-
-            // Add a click event listener to the scene element (whole screen)
-            scene.addEventListener("click", function () {
-                if (videoElement.paused) {
-                    // Play the video
-                    videoElement.play();
-                } else {
-                    // Pause the video
-                    videoElement.pause();
-                }
-            });
-        }
-        initializeAR();
-    </script>
 </body>
 
 </html>
