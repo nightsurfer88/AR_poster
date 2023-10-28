@@ -20,24 +20,23 @@
         }
     </style>
 </head>
+
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster 1.4</div>
+    <div id="ar-title">AR Poster 1.5</div>
 
     <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
-            <!-- Container for video and play button -->
-            <a-entity position="0 0 0">
-                <!-- Use the a-video component to display an MP4 video with a poster -->
-                <a-video
-                    position="0 0 0"
-                    scale="3.5 2 1"
-                    rotation="-90 0 0"
-                    src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
-                    id="video"
-                    poster="https://nightsurfer88.github.io/AR_poster/Assets/poster.png"
-                    muted
-                ></a-video>
+            <!-- Use the a-video component to display an MP4 video with a poster -->
+            <a-video
+                position="0 0 0"
+                scale="3.5 2 1"
+                rotation="-90 0 0"
+                src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
+                id="video"
+                poster="https://nightsurfer88.github.io/AR_poster/Assets/poster.png"
+                muted
+            ></a-video>
                 <!-- Play button (start button) -->
                 <!--<a-image
                     position="0 0.3 0"
@@ -46,9 +45,28 @@
                     src="https://nightsurfer88.github.io/AR_poster/Assets/play_button.png" 
                     id="play-button"
                 ></a-image> -->
-            </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        function initializeAR() {
+            const videoElement = document.getElementById("video");
+            const scene = document.querySelector("a-scene");
+
+            // Add a click event listener to the scene element (whole screen)
+            scene.addEventListener("click", () => {
+                if (videoElement.paused) {
+                    // Play the video
+                    videoElement.play();
+                } else {
+                    // Pause the video
+                    videoElement.pause();
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", initializeAR);
+    </script>
 </body>
 </html>
