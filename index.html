@@ -23,7 +23,7 @@
 
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster 1.11</div>
+    <div id="ar-title">AR Poster 1.12</div>
 
     <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
@@ -39,7 +39,6 @@
                 autoplay="false"
                 playsinline
                 webkit-playsinline
-                controls
             ></a-video>
         </a-marker>
         <a-entity camera></a-entity>
@@ -48,8 +47,9 @@
     <script>
         function initializeAR() {
             const videoElement = document.getElementById("video");
+            const scene = document.querySelector("a-scene");
 
-            videoElement.addEventListener("click", function () {
+            scene.addEventListener("click", function () {
                 if (videoElement.paused) {
                     videoElement.play();
                 } else {
