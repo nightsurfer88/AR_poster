@@ -33,9 +33,7 @@
                     src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
                     id="video"
                     muted
-                    autoplay
-                    poster="https://nightsurfer88.github.io/AR_poster/Assets/poster.png"
-                    controls
+                    autoplay="false"
                 ></a-video>
                 <!-- Play button (start button) -->
                 <a-image
@@ -55,22 +53,35 @@
             const videoElement = document.getElementById("video");
             const playButton = document.getElementById("play-button");
 
-            videoElement.addEventListener("playing", () => {
+            // Check if AR marker is found
+            const marker = document.querySelector('a-marker[type="pattern"]');
+            
+            if (marker) {
+                marker.addEventListener("markerFound", () => {
+                    // Show the play button (start button) when marker is found
+                    playButton.setAttribute("visible", true);
+                });
+            }
+
+            // Add a click event listener to the play button (start button)
+            playButton.addEventListener("click", () => {
+                // Start the video and hide the play button (start button)
+                videoElement.play();
+                playButton.setAttribute("visible", false);
+            });
+
+            // Add event listener for video play
+            videoElement.addEventListener("play", () => {
                 // Video is playing, hide the play button (start button)
                 playButton.setAttribute("visible", false);
             });
 
+            // Add event listener for video end
             videoElement.addEventListener("ended", () => {
                 // Video has ended, show the play button (start button) again
                 playButton.setAttribute("visible", true);
             });
 
-            // Add a click event listener to the play button (start button)
-            playButton.addEventListener("click", () => {
-                // Start the video and update the visible state of the play button (start button)
-                videoElement.play();
-                playButton.setAttribute("visible", false);
-            });
         }
 
         // Add an event listener to call the initialization function when the page has finished loading
