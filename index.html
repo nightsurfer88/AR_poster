@@ -23,7 +23,7 @@
 
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster 1.8</div>
+    <div id="ar-title">AR Poster 1.9</div>
 
     <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
@@ -44,7 +44,24 @@
     <script>
         function initializeAR() {
             const videoElement = document.getElementById("video");
-            
+
+            // Function to request user permission for autoplay
+            function requestAutoplayPermission() {
+                if (typeof videoElement.requestFullscreen === "function") {
+                    videoElement.requestFullscreen();
+                } else if (typeof videoElement.mozRequestFullScreen === "function") {
+                    videoElement.mozRequestFullScreen();
+                } else if (typeof videoElement.webkitRequestFullscreen === "function") {
+                    videoElement.webkitRequestFullscreen();
+                }
+            }
+
+            // Check if the user is on a mobile device
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|webOS|BlackBerry|IEMobile|Opera Mini)/i)) {
+                // Request permission to play the video
+                requestAutoplayPermission();
+            }
+
             // Pause the video immediately after it loads
             videoElement.addEventListener("canplay", function() {
                 videoElement.pause();
