@@ -18,12 +18,22 @@
             font-size: 24px;
             padding: 10px;
         }
+        #video-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster 1.4</div>
+    <div id="ar-title">AR Poster 1.10</div>
 
     <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
@@ -41,24 +51,28 @@
         <a-entity camera></a-entity>
     </a-scene>
 
+    <div id="video-controls" onclick="toggleVideo()">
+        Play/Pause
+    </div>
+
     <script>
+        let isVideoPlaying = false;
+
         function initializeAR() {
             const videoElement = document.getElementById("video");
 
-            // Attempt to play the video on user interaction (e.g., click)
-            document.body.addEventListener("click", function () {
-                if (videoElement.paused) {
-                    videoElement.play().catch(function (error) {
-                        // Auto-play was prevented; handle the error here
-                        console.error("Autoplay prevented:", error);
-                    });
-                }
-            });
+            // Initialize the video as paused
+            videoElement.pause();
+        }
 
-            // Pause the video immediately after it loads
-            videoElement.addEventListener("canplay", function() {
+        function toggleVideo() {
+            const videoElement = document.getElementById("video");
+            if (isVideoPlaying) {
                 videoElement.pause();
-            });
+            } else {
+                videoElement.play();
+            }
+            isVideoPlaying = !isVideoPlaying;
         }
 
         document.addEventListener("DOMContentLoaded", initializeAR);
