@@ -37,7 +37,6 @@
                     src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
                     id="video"
                     poster="https://nightsurfer88.github.io/AR_poster/Assets/poster.png"
-                    willReadFrequently="true"
                 ></a-video>
                 <!-- Play button (start button) -->
                 <a-image
@@ -76,6 +75,11 @@
                 }
             });
         }
+
+        // Prevent video autoplay
+        const videoElement = document.getElementById("video");
+        videoElement.removeAttribute("autoplay");
+        videoElement.pause();
 
         document.addEventListener("DOMContentLoaded", initializeAR);
     </script>
