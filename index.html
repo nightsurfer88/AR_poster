@@ -17,9 +17,10 @@
 
         <a-assets>
             <video id="animated-asset" src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4" autoplay loop muted></video>
+            <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt" id="custom-marker"></a-marker>
         </a-assets>
 
-        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="animated-marker" type='barcode' value='6'>
+        <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" id="animated-marker" type="pattern" value="6">
             <a-video
                 id="animated-model"
                 src="#animated-asset"
