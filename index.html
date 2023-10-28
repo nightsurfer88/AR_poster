@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-<!-- we import arjs version without NFT but with marker + location-based support -->
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 <style>
     /* CSS styles for the title */
@@ -33,7 +32,6 @@
                     src="https://nightsurfer88.github.io/AR_poster/Assets/asset.mp4"
                     id="video"
                     muted
-                    autoplay="false"
                 ></a-video>
                 <!-- Play button (start button) -->
                 <a-image
@@ -48,43 +46,28 @@
         <a-entity camera></a-entity>
     </a-scene>
     <script>
-        // Wrap the event listener registration in a function
         function initializeAR() {
             const videoElement = document.getElementById("video");
             const playButton = document.getElementById("play-button");
 
-            // Check if AR marker is found
-            const marker = document.querySelector('a-marker[type="pattern"]');
-            
-            if (marker) {
-                marker.addEventListener("markerFound", () => {
-                    // Show the play button (start button) when marker is found
-                    playButton.setAttribute("visible", true);
-                });
-            }
+            videoElement.addEventListener("loadedmetadata", () => {
+                // Video metadata is loaded; you can play the video here.
+                videoElement.play();
+            });
 
-            // Add a click event listener to the play button (start button)
+            videoElement.addEventListener("playing", () => {
+                // Video is playing, hide the play button (start button).
+                playButton.setAttribute("visible", false);
+            });
+
+            // Add a click event listener to the play button (start button).
             playButton.addEventListener("click", () => {
-                // Start the video and hide the play button (start button)
+                // Start the video and update the visible state of the play button (start button).
                 videoElement.play();
                 playButton.setAttribute("visible", false);
             });
-
-            // Add event listener for video play
-            videoElement.addEventListener("play", () => {
-                // Video is playing, hide the play button (start button)
-                playButton.setAttribute("visible", false);
-            });
-
-            // Add event listener for video end
-            videoElement.addEventListener("ended", () => {
-                // Video has ended, show the play button (start button) again
-                playButton.setAttribute("visible", true);
-            });
-
         }
 
-        // Add an event listener to call the initialization function when the page has finished loading
         document.addEventListener("DOMContentLoaded", initializeAR);
     </script>
 </body>
