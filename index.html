@@ -23,7 +23,7 @@
 
 <body style="margin: 0px; overflow: hidden;">
     <!-- AR Title -->
-    <div id="ar-title">AR Poster 1.12</div>
+    <div id="ar-title">AR Poster 1.13</div>
 
     <a-scene embedded arjs>
         <a-marker type="pattern" url="https://nightsurfer88.github.io/AR_poster/Assets/marker.patt">
@@ -49,7 +49,17 @@
             const videoElement = document.getElementById("video");
             const scene = document.querySelector("a-scene");
 
+            // Add a click event listener to the scene element (whole screen)
             scene.addEventListener("click", function () {
+                if (videoElement.paused) {
+                    videoElement.play();
+                } else {
+                    videoElement.pause();
+                }
+            });
+
+            // For Firefox Mobile and Chrome Mobile, add a touch event listener
+            scene.addEventListener("touchstart", function () {
                 if (videoElement.paused) {
                     videoElement.play();
                 } else {
